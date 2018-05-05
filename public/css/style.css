@@ -27,3 +27,8 @@ h2 {
 li {
   margin-top: 18px;
 }
+p.msg {
+  background: lightgreen;
+  color: brown;
+  border: 1px solid black;
+}
