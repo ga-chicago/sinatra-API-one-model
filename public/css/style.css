@@ -1,0 +1,26 @@
+body {
+  background-color: #f3d460;
+}
+
+
+/* from form.erb: be sure to add this class to that form while you're deleting the inline style */
+.form-partial {
+  border: 1px solid red; 
+  border-radius: 4px; 
+}
+
+/* style the h1 in layout.erb */
+h1#app-name {
+  border: 1px solid blue; 
+  border-radius: 10px;
+}
+
+nav p {
+  display: inline-block;
+}
+
+/* from hello.erb and/or item_index.erb and/or add_item.erb */
+h2 {
+  border: 1px solid brown; 
+  border-radius: 5px;
+}

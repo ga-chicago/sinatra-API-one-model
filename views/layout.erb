@@ -2,15 +2,17 @@
 <html>
 <head>
   <title><%= @page %></title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
   <nav>
     <!-- REMEMBER: DO NOT USE INLINE STYLES.  -->
-    <p style="display: inline-block;">Nav:</p>
+    <p>Nav:</p>
     <a href="/items">Item list</a> •
     <a href="/items/add">Add Items</a>
   </nav>
-  <h1 id="app-name">Awesome Site!</h1>   <h1 style="border: 1px solid blue; border-radius: 10px">Awesome Item App (layout.erb)</h1>
+  <h1 id="app-name">Awesome Site!</h1>   
+
   <%= yield %> 
 
 </body>
