@@ -19,6 +19,7 @@ class ItemController < ApplicationController
     erb :add_item # this view will be created in the next step
   end
 
+  # create route
   post '/' do
 
     pp params
@@ -35,7 +36,8 @@ class ItemController < ApplicationController
     redirect '/items'
 
   end
-  
+
+  # destroy route  
   delete '/:id' do
     # there are many ways to do this find statement, this is just one
     # remember you can play around with ActiveRecord by adding binding.pry 
@@ -44,4 +46,29 @@ class ItemController < ApplicationController
     @item.destroy
     redirect '/items'
   end
+
+  # edit route
+  get '/edit/:id' do
+    @item = Item.find params[:id]
+    @page = "Edit Item #{@item.id}" #why am i using interpolation here?  try with concatenation and see what happens.
+    erb :edit_item
+  end
+
+  # update route
+  patch '/:id' do
+    # like i said -- lots of ways to do this.  
+    # http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html
+    # http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where
+    @items = Item.where(id: params[:id]) 
+
+    # note: .where method gives us an array (Why?). So we must index. 
+    # Might there have been a more appropriate query method to use 
+    # instead of .where ?
+    @item = @items[0]
+
+    @item.title = params[:title]
+    @item.save
+    redirect '/items'
+  end
+
 end

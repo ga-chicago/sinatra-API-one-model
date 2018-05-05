@@ -24,3 +24,6 @@ h2 {
   border: 1px solid brown; 
   border-radius: 5px;
 }
+li {
+  margin-top: 18px;
+}
