@@ -4,9 +4,14 @@
   <title><%= @page %></title>
 </head>
 <body>
-  <h1 style="border: 1px solid blue; border-radius: 10px">Awesome Item App (layout.erb)</h1>
+  <nav>
+    <!-- REMEMBER: DO NOT USE INLINE STYLES.  -->
+    <p style="display: inline-block;">Nav:</p>
+    <a href="/items">Item list</a> •
+    <a href="/items/add">Add Items</a>
+  </nav>
+  <h1 id="app-name">Awesome Site!</h1>   <h1 style="border: 1px solid blue; border-radius: 10px">Awesome Item App (layout.erb)</h1>
   <%= yield %> 
-  <small>Thanks for using this site. This "footer" is in the main
-  layout.erb and will appear on all pages. © 2018 no one.</small>
+
 </body>
 </html>
