@@ -6,10 +6,19 @@
 </head>
 <body>
   <nav>
-    <!-- REMEMBER: DO NOT USE INLINE STYLES.  -->
-    <p>Nav:</p>
-    <a href="/items">Item list</a> •
-    <a href="/items/add">Add Items</a>
+    <div>
+      <p>Nav:</p>
+      <a href="/items">Item list</a> •
+      <a href="/items/add">Add Items</a>
+    </div>
+    <div>
+      <% if !session[:logged_in] %>
+        <a href="/user/login">Login</a>
+      <% else %>
+        <p>Logged in as <%= session[:username] %></p>
+        <a href="/user/logout">Logout</a>
+      <% end %>
+    </div>
   </nav>
   <h1 id="app-name">Awesome Site!</h1>   
   <% if session[:message] %>
