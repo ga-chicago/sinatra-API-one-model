@@ -27,7 +27,7 @@ class ItemController < ApplicationController
     # this is how you add something with ActiveRecord.  
     @item = Item.new
     @item.title = params[:title]
-    @item.user_id = 1 # for now
+    @item.user_id = session[:user_id]
     @item.save
 
     session[:message] = "You added item \##{@item.id}."
