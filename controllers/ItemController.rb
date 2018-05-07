@@ -2,13 +2,17 @@ class ItemController < ApplicationController
 
   # filter to allow JSON requests to be processed
   before do
+
     payload_body = request.body.read
-    @payload = JSON.parse(payload_body).symbolize_keys
 
-    puts "-----------------------------------------------HERE IS OUR PAYLOAD"
-    pp @payload
-    puts "-----------------------------------------------------------------"
+    if(payload_body != "")
+      @payload = JSON.parse(payload_body).symbolize_keys
 
+      puts "-----------------------------------------------HERE IS OUR PAYLOAD"
+      pp @payload
+      puts "-----------------------------------------------------------------"
+
+    end
   end
 
 
