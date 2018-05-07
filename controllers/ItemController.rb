@@ -1,5 +1,16 @@
 class ItemController < ApplicationController
 
+  # filter to allow JSON requests to be processed
+  before do
+    payload_body = request.body.read
+    @payload = JSON.parse(payload_body).symbolize_keys
+
+    puts "-----------------------------------------------HERE IS OUR PAYLOAD"
+    pp @payload
+    puts "-----------------------------------------------------------------"
+
+  end
+
 
   # index route
   get '/' do
@@ -30,7 +41,7 @@ class ItemController < ApplicationController
 
     # this is how you add something with ActiveRecord.  
     @item = Item.new
-    @item.title = params[:title]
+    @item.title = @payload[:title]
     @item.save
 
     # session[:message] = "You added item \##{@item.id}."
@@ -86,7 +97,7 @@ class ItemController < ApplicationController
     # http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where
     @item = Item.find(params[:id]) 
     # later we'll do more work here
-    @item.title = params[:title]
+    @item.title = @payload[:title]
     @item.save
 
     {
