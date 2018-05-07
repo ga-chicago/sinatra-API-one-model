@@ -1,36 +1,18 @@
 class ItemController < ApplicationController
 
-  before do
-    if !session[:logged_in]
-      session[:message] = "You must be logged in to do that"
-      redirect '/user/login'
-    end
-  end
 
   # index route
   get '/' do
 
-    # @items = Item.all # delete this and replace with: 
-    @user = User.find session[:user_id]
+    @items = Item.all # delete this and replace with: 
 
-    # How cool is this
-    @items = @user.items
+    @items.to_json
 
-    # @items.to_json
-    @page = "Index of items"
-    erb :item_index
   end
 
   # add route 
-  get '/add' do
-    @page = "Add Item"
-    @action = "/items"
-    @method = "POST"
-    @placeholder = "Enter your item!"
-    @value=""
-    @buttontext = "Add Item"
-    erb :add_item # this view will be created in the next step
-  end
+  # deleted 
+
 
   # create route
   post '/' do
@@ -64,11 +46,8 @@ class ItemController < ApplicationController
   end
 
   # edit route
-  get '/edit/:id' do
-    @item = Item.find params[:id]
-    @page = "Edit Item #{@item.id}" #why am i using interpolation here?  try with concatenation and see what happens.
-    erb :edit_item
-  end
+  # deleted
+
 
   # update route
   patch '/:id' do
