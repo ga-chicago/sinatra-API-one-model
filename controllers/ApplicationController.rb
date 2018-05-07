@@ -3,22 +3,27 @@ class ApplicationController < Sinatra::Base
   require 'bundler'
   Bundler.require()
 
-  enable :sessions # yep, that's it
-
   ActiveRecord::Base.establish_connection(
     :adapter => 'postgresql', 
     :database => 'item'
   )
+
   use Rack::MethodOverride  # we "use" middleware in Rack-based libraries/frameworks
   set :method_override, true
 
-  set :public_dir, File.expand_path('../public', File.dirname(__FILE__))
-  
-  set :views, File.expand_path('../views', File.dirname(__FILE__))
-
   get '/' do
-    @page = "hello"
-    erb :hello
+    {
+      success: false,
+      message: "Please consult the API documentation"
+    }.to_json
+  end
+
+  get '*' do
+    {
+      success: false,
+      message: "404 page not found"
+    }.to_json
+    # halt 404  -- you can use halt to send HTTP error (or success but why?) codes
   end
 
 end

@@ -14,6 +14,16 @@ class ItemController < ApplicationController
 
   end
 
+  # show route
+  get '/:id' do
+    Item.find(params[:id])
+    {
+      success: true,
+      message: "Found item #{@item.id}",
+      found_item: @item
+    }
+
+  end
 
   # create route
   post '/' do
