@@ -1,8 +1,21 @@
 class ItemController < ApplicationController
 
+  before do
+    if !session[:logged_in]
+      session[:message] = "You must be logged in to do that"
+      redirect '/user/login'
+    end
+  end
+
   # index route
   get '/' do
-    @items = Item.all # beautiful isn't it
+
+    # @items = Item.all # delete this and replace with: 
+    @user = User.find session[:user_id]
+
+    # How cool is this
+    @items = @user.items
+
     # @items.to_json
     @page = "Index of items"
     erb :item_index
