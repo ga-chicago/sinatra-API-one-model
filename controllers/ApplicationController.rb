@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
 
   ActiveRecord::Base.establish_connection(
     :adapter => 'postgresql', 
-    :database => 'item'
+    :database => 'item2'
   )
 
   use Rack::MethodOverride  # we "use" middleware in Rack-based libraries/frameworks

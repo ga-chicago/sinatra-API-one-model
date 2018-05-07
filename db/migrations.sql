@@ -1,15 +1,10 @@
-CREATE DATABASE item;
+DROP DATABASE IF EXISTS item2;
 
-\c item
+CREATE DATABASE item2;
 
-CREATE TABLE users(
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(32),
-  password_digest VARCHAR(60)
-);
+\c item2
 
 CREATE TABLE items(
   id SERIAL PRIMARY KEY,
-  title VARCHAR(255),
-  user_id INT REFERENCES users(id)
+  title VARCHAR(255)
 );

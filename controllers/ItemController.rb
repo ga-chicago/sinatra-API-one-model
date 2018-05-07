@@ -31,7 +31,6 @@ class ItemController < ApplicationController
     # this is how you add something with ActiveRecord.  
     @item = Item.new
     @item.title = params[:title]
-    @item.user_id = params[:user_id] 
     @item.save
 
     # session[:message] = "You added item \##{@item.id}."
@@ -39,7 +38,7 @@ class ItemController < ApplicationController
     # again-- we could (and in gneral should write code to send back a seimialr error response if there was an error)
     {
       success: true,
-      message: "Item #{@item.user_id} successfully created",
+      message: "Item #{@item.id} successfully created",
       added_item: @item
     }.to_json
 
