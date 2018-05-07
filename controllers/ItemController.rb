@@ -17,20 +17,16 @@ class ItemController < ApplicationController
   # create route
   post '/' do
 
-    pp params
-
     # this is how you add something with ActiveRecord.  
     @item = Item.new
     @item.title = params[:title]
-    @item.user_id = session[:user_id]
+    @item.user_id = params[:user_id] 
     @item.save
 
-    session[:message] = "You added item \##{@item.id}."
+    # session[:message] = "You added item \##{@item.id}."
 
-    # hey there's a .to_json method. cool.
-    # @item.to_json # we will come back to this
-
-    redirect '/items'
+    @item.to_json # we will come back to this
+                  
 
   end
 
