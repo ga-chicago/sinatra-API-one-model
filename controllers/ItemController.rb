@@ -65,19 +65,17 @@ class ItemController < ApplicationController
     # like i said -- lots of ways to do this.  
     # http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html
     # http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where
-    @items = Item.where(id: params[:id]) 
-
-    # note: .where method gives us an array (Why?). So we must index. 
-    # Might there have been a more appropriate query method to use 
-    # instead of .where ?
-    @item = @items[0]
-
+    @item = Item.find(params[:id]) 
+    # later we'll do more work here
     @item.title = params[:title]
     @item.save
 
-    session[:message] = "You updated item \##{@item.id}"
+    {
+      success: true,
+      message: "You updated item \##{@item.id}",
+      updated_item: @item
+    }.to_json
 
-    redirect '/items'
   end
 
 end
