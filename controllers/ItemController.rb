@@ -36,6 +36,16 @@ class ItemController < ApplicationController
     # session[:message] = "You added item \##{@item.id}."
 
     # again-- we could (and in gneral should write code to send back a seimialr error response if there was an error)
+    # in general, think about what work you're taking on 
+    # and what work will be handled by the front end developerx
+    # for example:
+      # • pagination? 
+      # • logic to figure out what happened? and if its what we want? liiike...
+      #   • are you gonna send back an item?
+      #   • just the one item or all the items?
+      # do you need to be communicating with your FE Devs about this?
+      # or if its for public consumption what do you need to be sure to explain in your API documentation
+
     {
       success: true,
       message: "Item #{@item.id} successfully created",
