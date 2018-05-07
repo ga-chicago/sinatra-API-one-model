@@ -6,12 +6,13 @@ class ItemController < ApplicationController
 
     @items = Item.all # delete this and replace with: 
 
-    @items.to_json
+    {
+      success: true,
+      message: "Successfully retrieved #{@items.length} items.",
+      retrieved_items: @items
+    }.to_json
 
   end
-
-  # add route 
-  # deleted 
 
 
   # create route
@@ -25,8 +26,12 @@ class ItemController < ApplicationController
 
     # session[:message] = "You added item \##{@item.id}."
 
-    @item.to_json # we will come back to this
-                  
+    # again-- we could (and in gneral should write code to send back a seimialr error response if there was an error)
+    {
+      success: true,
+      message: "Item #{@item.user_id} successfully created",
+      added_item: @item
+    }.to_json
 
   end
 
@@ -37,8 +42,18 @@ class ItemController < ApplicationController
     # and trying stuff out
     @item = Item.find params[:id]
     @item.destroy
-    session[:message] = "You deleted item \##{@item.id}"
-    redirect '/items'
+
+    # in general you might send back one response for sucessful operation  (below) and 
+    # maybe you might write logic to send back a error response if there's an error, 
+    # similar to the one below but
+    # success: false and message: "here's what went wrong"
+
+    {  
+       success: true,
+       message: "You deleted item \##{@item.id}",
+       deleted_item: @item
+    }.to_json
+
   end
 
   # edit route
