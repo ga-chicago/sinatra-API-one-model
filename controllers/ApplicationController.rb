@@ -8,6 +8,25 @@ class ApplicationController < Sinatra::Base
     :database => 'item2'
   )
 
+
+  #### ADDED FOR CORS ####
+  register Sinatra::CrossOrigin
+
+  configure do
+    enable :cross_origin
+  end
+
+  set :allow_methods, [:get, :post, :delete, :put, :patch, :options]
+
+  options '*' do
+    p "options"
+    response.headers['Allow'] = 'HEAD, GET, POST, PUT, PATCH, DELETE'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+  end
+
+  #### end of CORS stuff####
+
   get '/' do
     {
       success: false,
