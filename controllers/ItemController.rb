@@ -3,19 +3,20 @@ class ItemController < ApplicationController
   # filter to allow JSON requests to be processed
   before do
     payload_body = request.body.read
-    @payload = JSON.parse(payload_body).symbolize_keys
+    if(payload_body != "")
+      @payload = JSON.parse(payload_body).symbolize_keys
 
-    puts "-----------------------------------------------HERE IS OUR PAYLOAD"
-    pp @payload
-    puts "-----------------------------------------------------------------"
-
+      puts "-----------------------------------------------HERE IS OUR PAYLOAD"
+      pp @payload
+      puts "-----------------------------------------------------------------"
+    end
   end
 
 
   # index route
   get '/' do
-
-    @items = Item.all # delete this and replace with: 
+    puts 'hitting'
+    @items = Item.all # delete this and replace with:
 
     {
       success: true,
@@ -38,8 +39,9 @@ class ItemController < ApplicationController
 
   # create route
   post '/' do
-
-    # this is how you add something with ActiveRecord.  
+    p @payload
+    p'--------------------'
+    # this is how you add something with ActiveRecord.
     @item = Item.new
     @item.title = @payload[:title]
     @item.save
@@ -47,10 +49,10 @@ class ItemController < ApplicationController
     # session[:message] = "You added item \##{@item.id}."
 
     # again-- we could (and in gneral should write code to send back a seimialr error response if there was an error)
-    # in general, think about what work you're taking on 
+    # in general, think about what work you're taking on
     # and what work will be handled by the front end developerx
     # for example:
-      # • pagination? 
+      # • pagination?
       # • logic to figure out what happened? and if its what we want? liiike...
       #   • are you gonna send back an item?
       #   • just the one item or all the items?
@@ -65,20 +67,20 @@ class ItemController < ApplicationController
 
   end
 
-  # destroy route  
+  # destroy route
   delete '/:id' do
     # there are many ways to do this find statement, this is just one
-    # remember you can play around with ActiveRecord by adding binding.pry 
+    # remember you can play around with ActiveRecord by adding binding.pry
     # and trying stuff out
     @item = Item.find params[:id]
     @item.destroy
 
-    # in general you might send back one response for sucessful operation  (below) and 
-    # maybe you might write logic to send back a error response if there's an error, 
+    # in general you might send back one response for sucessful operation  (below) and
+    # maybe you might write logic to send back a error response if there's an error,
     # similar to the one below but
     # success: false and message: "here's what went wrong"
 
-    {  
+    {
        success: true,
        message: "You deleted item \##{@item.id}",
        deleted_item: @item
@@ -91,11 +93,11 @@ class ItemController < ApplicationController
 
 
   # update route
-  patch '/:id' do
-    # like i said -- lots of ways to do this.  
+  put '/:id' do
+    # like i said -- lots of ways to do this.
     # http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html
     # http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where
-    @item = Item.find(params[:id]) 
+    @item = Item.find(params[:id])
     # later we'll do more work here
     @item.title = @payload[:title]
     @item.save
