@@ -37,7 +37,7 @@ class UserController < ApplicationController
     user.password = @payload[:password]
     user.save
     session[:logged_in] = true
-    session[:username] = username
+    session[:username] = user.username
 
     {
       success: true,
