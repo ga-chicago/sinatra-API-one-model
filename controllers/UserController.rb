@@ -39,6 +39,10 @@ class UserController < ApplicationController
     session[:logged_in] = true
     session[:username] = user.username
 
+    puts '=============================='
+    puts session
+    binding.pry
+    puts '=============================='
     {
       success: true,
       message: "You are logged in",

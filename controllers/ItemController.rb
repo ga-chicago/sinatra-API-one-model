@@ -16,8 +16,8 @@ class ItemController < ApplicationController
   # index route
   get '/' do
 
-
-    puts session
+    puts 'this is the session in the get router buddy'
+    puts session[:username]
     puts '----------------------------------------------'
 
 
@@ -28,6 +28,9 @@ class ItemController < ApplicationController
       message: "Successfully retrieved #{@items.length} items.",
       retrieved_items: @items
     }.to_json
+
+
+
 
   end
 
@@ -45,8 +48,12 @@ class ItemController < ApplicationController
   # create route
   post '/' do
 
-    p @payload
-    p'--------------------'
+    puts 'this is the session in the get router buddy'
+    puts session[:username]
+    puts session
+    puts session[:logged_in]
+    binding.pry
+    puts '----------------------------------------------'
 
     # this is how you add something with ActiveRecord.
     @item = Item.new
