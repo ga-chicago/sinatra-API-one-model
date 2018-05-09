@@ -3,7 +3,6 @@ class ItemController < ApplicationController
   # filter to allow JSON requests to be processed
   before do
     payload_body = request.body.read
-
     if(payload_body != "")
       @payload = JSON.parse(payload_body).symbolize_keys
 
@@ -17,8 +16,10 @@ class ItemController < ApplicationController
   # index route
   get '/' do
 
+
     puts session
     puts '----------------------------------------------'
+
 
     @items = Item.all # delete this and replace with:
 
@@ -43,6 +44,9 @@ class ItemController < ApplicationController
 
   # create route
   post '/' do
+
+    p @payload
+    p'--------------------'
 
     # this is how you add something with ActiveRecord.
     @item = Item.new
@@ -95,8 +99,11 @@ class ItemController < ApplicationController
   # deleted
 
 
-  # update route
-  patch '/:id' do
+
+
+
+  put '/:id' do
+
     # like i said -- lots of ways to do this.
     # http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html
     # http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where
