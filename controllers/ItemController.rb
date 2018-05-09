@@ -52,7 +52,7 @@ class ItemController < ApplicationController
     puts session[:username]
     puts session
     puts session[:logged_in]
-    binding.pry
+
     puts '----------------------------------------------'
 
     # this is how you add something with ActiveRecord.

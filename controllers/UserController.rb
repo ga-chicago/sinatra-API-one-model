@@ -41,7 +41,7 @@ class UserController < ApplicationController
 
     puts '=============================='
     puts session
-    binding.pry
+
     puts '=============================='
     {
       success: true,
