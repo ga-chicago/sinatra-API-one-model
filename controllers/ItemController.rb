@@ -1,5 +1,21 @@
 class ItemController < ApplicationController
 
+
+  before do 
+    puts ""
+    puts "hitting authentication filter in ItemControler, here is session: "
+    pp session 
+    puts "" 
+
+    if !session[:logged_in]
+      {
+        success: false,
+        message: "you must be logged in to do that"
+      }.to_json
+    end
+
+  end
+
   # filter to allow JSON requests to be processed
   before do
 
@@ -18,6 +34,12 @@ class ItemController < ApplicationController
 
   # index route
   get '/' do
+    # just to check
+    puts ""
+    puts "hitting get '/' (index) route in ItemController, here is session"
+    pp session
+    puts session.class
+    puts ""
 
     @items = Item.all # delete this and replace with: 
 
