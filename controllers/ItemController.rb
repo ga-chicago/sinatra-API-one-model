@@ -15,6 +15,11 @@ class ItemController < ApplicationController
     end
   end
 
+  before do
+    if !session[:logged_in]
+      halt 
+    end
+  end
 
   # index route
   get '/' do

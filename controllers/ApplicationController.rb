@@ -8,6 +8,9 @@ class ApplicationController < Sinatra::Base
     :database => 'item2'
   )
 
+  use Rack::Session::Cookie,  :key => 'rack.session',
+                              :path => '/',
+                              :secret => 'your_secret'
 
   #### ADDED FOR CORS ####
   register Sinatra::CrossOrigin
